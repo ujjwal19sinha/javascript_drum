@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum kit</title>
+    <link rel="stylesheet" href="style.css">
+ <link rel="icon" href="https://fav.farm/✅" />
+</head>
+<body>
+    <div class="keys">
+    <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">Clap</span>
+    </div>
+    <div data-key="83" class="key">
+        <kbd>S</kbd>
+        <span class="sound">arc</span>
+    </div>
+    <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span class="sound">casco</span>
+    </div>
+    <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span class="sound">Drum</span>
+    </div>
+    <div data-key="71" class="key">
+        <kbd>G</kbd>
+        <span class="sound">kick</span>
+    </div>
+    <div data-key="72" class="key">
+        <kbd>H</kbd>
+        <span class="sound">pop</span>
+    </div>
+    <div data-key="74" class="key">
+        <kbd>J</kbd>
+        <span class="sound">Snare</span>
+    </div>
+    <div data-key="75" class="key">
+        <kbd>K</kbd>
+        <span class="sound">Ton</span>
+    </div>
+    <div data-key="76" class="key">
+        <kbd>L</kbd>
+        <span class="sound">War</span>
+    </div>
+    </div>
+    <audio data-key="65" src="sound/clap.mp3"s></audio>
+    <audio data-key="83" src="sound/arc.wav"></audio>
+    <audio data-key="68" src="sound/casco.mp3"></audio>
+    <audio data-key="70" src="sound/drum.mp3"></audio>
+    <audio data-key="71" src="sound/kick.mp3"></audio>
+    <audio data-key="72" src="sound/pop.mp3"></audio>
+    <audio data-key="74" src="sound/snare.mp3"></audio>
+    <audio data-key="75" src="sound/ton.mp3"></audio>
+    <audio data-key="76" src="sound/war.mp3"></audio>
+</body>
+<script>
+   
+    function playsound(e){
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+        const key=document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if(!audio)return;
+        audio.currentTime=0;
+        audio.play();
+        key.classList.add('playing');
+    };
+    function removeTransition(e){
+    if(e.propertyName !== 'transform')
+    return;
+    this.classList.remove('playing');
+    }
+    const keys=document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend',removeTransition));
+    window.addEventListener('keydown',playsound);
+</script>
+</html>
